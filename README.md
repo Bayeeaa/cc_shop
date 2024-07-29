@@ -2,6 +2,6 @@
 
 This is my final project for the first semester, a static product display page implemented with Vue, TypeScript, and Vite. The UI framework used is Ant Design Vue,and the logo I created for it is 'cc shop' (the logo is homemade and a bit ugly 😅). It includes basic product display functionality, detailed information on click, user registration and login features, user information display and editing, as well as comprehensive product ranking.
 
-![home](image-20240729185336440.png)
+![home](README\image-20240729185336440.png)
 
-![shops_detail](C:\Users\yyn19\Desktop\ccshop\README\image-20240729185445496.png)
+![shops_detail](README\image-20240729185445496.png)

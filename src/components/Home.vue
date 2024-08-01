@@ -114,9 +114,12 @@ const datashop = ref([
     name:'办公椅',
     id:'4',
     img:'chair.avif',
-    des:'',
-    seller:'',
-    comment:'',
+    des:'坐下舒适，符合人体工程学，价格合适，适合久坐党入手',
+    seller:'999',
+    comment:[{
+      user:'ship123',
+      content:'坐着很舒适！'
+    }],
     price:'200',
   },
   {

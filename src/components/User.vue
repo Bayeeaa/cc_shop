@@ -41,7 +41,6 @@ const user_infomation = user_info()
 
 const register = () => {
   if(user.name == '未注册' && user.password == ''){
-    message.error('您还未注册，请您完成注册并登录');
     router.push('/register')
   }
 }

@@ -37,7 +37,18 @@
       </p>
     </template>
   </a-comment>
-  <a-comment>
+  <a-comment v-if="display == 1">
+    <template #author><a>{{ user.name }}</a></template>
+    <template #avatar>
+      <a-avatar :size="small">
+        <template #icon><UserOutlined /></template>
+      </a-avatar>
+    </template>
+    <template #content v-if="display == 1">
+        <a-input v-model:value="comment_content"></a-input>
+    </template>
+  </a-comment>
+  <a-comment v-if="display == 0 && comment_input==1">
     <template #author><a>{{ user.name }}</a></template>
     <template #avatar>
       <a-avatar :size="small">
@@ -45,12 +56,13 @@
       </a-avatar>
     </template>
     <template #content>
-      <p>
-        <a-input></a-input>
-      </p>
+      {{ comment_content }}
     </template>
   </a-comment>
-  <a-button @click="release_comment">发表评论</a-button>
+  <a-button v-if="display == 0 && comment_input == 0" @click="release_comment">发表评论</a-button>
+  <a-button v-if="display == 1" @click="comfirm">确认</a-button>
+  <a-button v-if="display == 1" @click="cancel">取消</a-button>
+  <a-button v-if="display == 0 && comment_input == 1" @click="edit">编辑</a-button>
 </div>
 </template>
 <script lang="ts" setup>
@@ -79,10 +91,34 @@ const buy = () => {
   }
 }
 
+let comment_content = ref('')
 let display = ref(0)
+let comment_input = ref(0)
 
 const release_comment = () => {
-  display = 1
+  if(user.name == '未注册' || user.name == '未登录'){
+    message.error("您还未登录，请先登录！")
+  }
+  else display.value = 1
+}
+
+const comfirm = () => {
+  if(comment_content.value == ''){
+    message.error("请输入内容！")
+  }
+  else{
+    comment_input.value = 1
+    display.value = 0
+    message.success("发表成功！")
+  }
+}
+
+const cancel = () => {
+  display.value = 0
+}
+
+const edit = () => {
+  display.value = 1
 }
 
 </script>

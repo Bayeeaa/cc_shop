@@ -78,6 +78,10 @@ const datashop = ref([
       {
         user:'Manbo',
         content:'很好，孩子很喜欢吃！',
+      },
+      {
+        user:'yc',
+        content:'不如省点钱充个原神648'
       }
     ],
     price:'30',
@@ -98,9 +102,12 @@ const datashop = ref([
     name:'夏日凉枕',
     id:'3',
     img:'pillow.avif',
-    des:'',
-    seller:'',
-    comment:'',
+    des:'清凉舒适，适合男女老少，枕头高度合适',
+    seller:'ycc',
+    comment:[{
+      user:'shipship',
+      content:'便宜而且好用！'
+    }],
     price:'60',
   },
   {
@@ -160,18 +167,6 @@ const count = (shopdata:any) => {
   rank.count_arry[shopdata.id - 1]++
 }
 
-// const addComment = (itemId: string, newComment: { user: string, content: string }) => {
-//   const item = datashop.value.find(item => item.id === itemId);
-//   if (item) {
-//     // 如果没有评论，则初始化为一个空数组
-//     if (!item.comment) {
-//       item.comment = [];
-//     }
-//     item.comment.push(newComment);
-//   } else {
-//     console.error('Item not found');
-//   }
-// };
 </script>
 <style scoped>
 :deep(.slick-slide) {

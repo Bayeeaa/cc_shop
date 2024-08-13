@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="title">
-            <div>综合排行</div>
+            <div>性价比排行</div>
         </div>
         <div class="rank">
             <a-list size="large" bordered :data-source="sortedData">
@@ -138,7 +138,7 @@ const sortedData = computed(() => {  //根据set_count后的数据进行排序
 .title{
     height: 90px;
     background-color: rgb(238, 236, 236);
-    padding: 0 140px;
-    font-size: 50px;
+    padding: 20px 140px;
+    font-size: 40px;
 }
 </style>

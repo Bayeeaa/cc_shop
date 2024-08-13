@@ -30,8 +30,10 @@
       </RouterLink>
     </div>
   </a-carousel>
-
-  <a-row :gutter="16">
+  <br>
+  <a-button @click="display_hot" v-if="d_hot == 1">按热度排序↓↓↓</a-button>
+  <a-button @click="display_default" v-if="d_hot == 0">按默认排序↓↓↓</a-button>
+  <a-row :gutter="16" v-if="d_hot == 1">
     <a-col class="gutter-row" :span="6" v-for="shops in datashop" >
       <RouterLink :to="{
         // path:'/detail',
@@ -57,9 +59,34 @@
     </a-col>
   </a-row>
 
+  <a-row :gutter="16" v-if="d_hot == 0">
+    <a-col class="gutter-row" :span="6" v-for="shops in sortedData" >
+      <RouterLink :to="{
+        name:'xiangqing',
+        query:{
+          name:shops.name,
+          des:shops.des,
+          seller:shops.seller,
+          comment:JSON.stringify(shops.comment),//这里是数组对象，不能直接传递字符串，因此要转成json文件
+          img:shops.img,
+          price:shops.price
+        }
+      }" @click="count(shops)">
+        <div class="gutter-box">
+          <div class="img_pos">
+            <img :src="imaUrl(shops.img)">
+          </div>
+          <div class="shops_name">
+            {{ shops.name }}
+          </div>
+        </div>
+      </RouterLink>  
+    </a-col>
+  </a-row>
+
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
 import { rank_data } from '@/stores/user'
 
@@ -85,6 +112,8 @@ const datashop = ref([
       }
     ],
     price:'30',
+    hot:5,
+    count:0,
   },
   {
     name:'收纳筐',
@@ -97,6 +126,8 @@ const datashop = ref([
       content:'便宜而且好用！'
     }],
     price:'20',
+    hot:1,
+    count:0,
   },
   {
     name:'夏日凉枕',
@@ -109,6 +140,8 @@ const datashop = ref([
       content:'便宜而且好用！'
     }],
     price:'60',
+    hot:9,
+    count:0,
   },
   {
     name:'办公椅',
@@ -121,6 +154,8 @@ const datashop = ref([
       content:'坐着很舒适！'
     }],
     price:'200',
+    hot:2,
+    count:0,
   },
   {
     name:'陶瓷杯子',
@@ -130,6 +165,8 @@ const datashop = ref([
     seller:'',
     comment:'',
     price:'40',
+    hot:3,
+    count:0,
   },
   {
     name:'夏威夷风裤',
@@ -139,6 +176,8 @@ const datashop = ref([
     seller:'',
     comment:'',
     price:'99',
+    hot:8,
+    count:0,
   },
   {
     name:'水杯',
@@ -148,6 +187,8 @@ const datashop = ref([
     seller:'',
     comment:'',
     price:'50',
+    hot:10,
+    count:0,
   },
   {
     name:'帆布包',
@@ -157,6 +198,8 @@ const datashop = ref([
     seller:'',
     comment:'',
     price:'60',
+    hot:6,
+    count:0,
   }
 ])
 
@@ -168,6 +211,30 @@ const rank = rank_data()
 
 const count = (shopdata:any) => {
   rank.count_arry[shopdata.id - 1]++
+}
+
+const set_count = () => {
+    for(let i=0;i<datashop.value.length;i++){
+        datashop.value[i].count = rank.count_arry[i] * 0.4 + datashop.value[i].hot * 0.6 || 0
+    }
+}
+
+onMounted(() => {
+  set_count();
+});
+
+const sortedData = computed(() => {  //根据set_count后的数据进行排序
+  return [...datashop.value].sort((a, b) => Number(b.count) - Number(a.count));
+});
+
+let d_hot = ref(1)
+
+const display_hot = () => {
+  d_hot.value = 0
+}
+
+const display_default = () => {
+  d_hot.value = 1
 }
 
 </script>

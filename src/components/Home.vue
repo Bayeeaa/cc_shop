@@ -109,6 +109,10 @@ const datashop = ref([
       {
         user:'yc',
         content:'不如省点钱充个原神648'
+      },
+      {
+        user:'kiki',
+        content:'manbaout',
       }
     ],
     price:'30',

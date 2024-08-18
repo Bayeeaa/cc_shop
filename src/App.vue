@@ -11,7 +11,7 @@
         </a-menu-item>
         <a-menu-item key="2">
           <desktop-outlined />
-          <RouterLink to="/rank">  排行榜 </RouterLink>
+          <RouterLink to="/rank">  性价比排行榜 </RouterLink>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>

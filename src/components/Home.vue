@@ -21,7 +21,8 @@
           seller:shops.seller,
           comment:JSON.stringify(shops.comment),
           img:shops.img,
-          price:shops.price
+          price:shops.price,
+          video:shops.video
         }
       }">
         <div class="carousel_img">
@@ -44,7 +45,8 @@
           seller:shops.seller,
           comment:JSON.stringify(shops.comment),//这里是数组对象，不能直接传递字符串，因此要转成json文件
           img:shops.img,
-          price:shops.price
+          price:shops.price,
+          video:shops.video
         }
       }" @click="count(shops)">
         <div class="gutter-box">
@@ -69,7 +71,8 @@
           seller:shops.seller,
           comment:JSON.stringify(shops.comment),//这里是数组对象，不能直接传递字符串，因此要转成json文件
           img:shops.img,
-          price:shops.price
+          price:shops.price,
+          video:shops.video
         }
       }" @click="count(shops)">
         <div class="gutter-box">
@@ -95,6 +98,7 @@ const datashop = ref([
     name:'手工DIY收纳册',
     id:'1',
     img:'diy.avif',
+    video:'diy_book.mp4',
     des:'可以收集叶片进行展示，可以记录很多信息。',
     seller:'500c',
     comment:[
@@ -123,6 +127,7 @@ const datashop = ref([
     name:'收纳筐',
     id:'2',
     img:'collect.avif',
+    video:'',
     des:'可以收纳很多东西，方便储存利用，帮你减轻负担。',
     seller:'ye',
     comment:[{
@@ -137,6 +142,7 @@ const datashop = ref([
     name:'夏日凉枕',
     id:'3',
     img:'pillow.avif',
+    video:'',
     des:'清凉舒适，适合男女老少，枕头高度合适',
     seller:'ycc',
     comment:[{
@@ -151,6 +157,7 @@ const datashop = ref([
     name:'办公椅',
     id:'4',
     img:'chair.avif',
+    video:'',
     des:'坐下舒适，符合人体工程学，价格合适，适合久坐党入手',
     seller:'999',
     comment:[{
@@ -165,6 +172,7 @@ const datashop = ref([
     name:'陶瓷杯子',
     id:'5',
     img:'cup.avif',
+    video:'',
     des:'',
     seller:'',
     comment:'',
@@ -176,6 +184,7 @@ const datashop = ref([
     name:'夏威夷风裤',
     id:'6',
     img:'pants.avif',
+    video:'',
     des:'',
     seller:'',
     comment:'',
@@ -187,6 +196,7 @@ const datashop = ref([
     name:'水杯',
     id:'7',
     img:'bottle.avif',
+    video:'',
     des:'',
     seller:'',
     comment:'',
@@ -198,6 +208,7 @@ const datashop = ref([
     name:'帆布包',
     id:'8',
     img:'bag.avif',
+    video:'',
     des:'',
     seller:'',
     comment:'',

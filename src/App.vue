@@ -7,7 +7,7 @@
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
           <pie-chart-outlined />
-          <RouterLink to="/123"> 首页 </RouterLink>
+          <RouterLink to="/cc_shop"> 首页 </RouterLink>
         </a-menu-item>
         <a-menu-item key="2">
           <desktop-outlined />

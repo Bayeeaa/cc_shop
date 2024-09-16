@@ -20,7 +20,7 @@
       <a-layout-header style="background: #ffffff; padding: 0;" >
         <div style="float: right; padding-right: 20px;">
           <RouterLink to="/user">
-            <a-avatar :size="small">
+            <a-avatar>
               <template #icon><UserOutlined /></template>
             </a-avatar>
               {{ user.name }}

@@ -14,7 +14,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'    
-import { rank_data } from '@/stores/user'
+import { rank_data } from '../stores/user'
 
 const datashop = ref([
   {

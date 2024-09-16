@@ -2,8 +2,8 @@
 <div class="show">
   <div class="display">
     <!-- 视频优先级高于图片 -->
-    <video :src="imgUrl(route.query.video)" controls v-if="route.query.video != ''"></video> 
-    <img :src="imgUrl(route.query.img)" v-else-if="route.query.img != ''">
+    <video :src="imgUrl(route.query.video as string)" controls v-if="route.query.video != ''"></video> 
+    <img :src="imgUrl(route.query.img as string)" v-else-if="route.query.img != ''">
   </div>
   <div class="content">
     <div class="title">
@@ -29,7 +29,7 @@
   <a-comment v-for="com in Comment">
     <template #author><a>{{ com.user }}</a></template>
     <template #avatar>
-      <a-avatar :size="small">
+      <a-avatar>
         <template #icon><UserOutlined /></template>
       </a-avatar>
     </template>
@@ -42,7 +42,7 @@
   <a-comment v-if="display == 1">
     <template #author><a>{{ user.name }}</a></template>
     <template #avatar>
-      <a-avatar :size="small">
+      <a-avatar>
         <template #icon><UserOutlined /></template>
       </a-avatar>
     </template>
@@ -53,7 +53,7 @@
   <a-comment v-if="display == 0 && comment_input==1">
     <template #author><a>{{ user.name }}</a></template>
     <template #avatar>
-      <a-avatar :size="small">
+      <a-avatar>
         <template #icon><UserOutlined /></template>
       </a-avatar>
     </template>
@@ -69,14 +69,14 @@
 </template>
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
-import { user_state } from '@/stores/user'
+import { user_state } from '../stores/user'
 import { message } from 'ant-design-vue';
 import router from '../router';
 import { UserOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 
 let route = useRoute()
-const Comment = JSON.parse(route.query.comment); //解析json文件
+const Comment = JSON.parse(route.query.comment as string); //解析json文件
 
 const imgUrl = (url: string) => { //动态设置图片地址
   return new URL(`../assets/${url}`, import.meta.url).href

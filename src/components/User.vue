@@ -29,7 +29,7 @@ import { user_state } from '../stores/user'
 import { User_info } from '../utils/user_info'
 import router from '../router';
 import { watch } from 'vue';
-import { user_info } from '@/stores/user'
+import { user_info } from '../stores/user'
 
 onMounted(() => {
   register()

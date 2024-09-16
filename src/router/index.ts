@@ -12,7 +12,7 @@ const router = createRouter({
     history:createWebHistory(),
     routes:[
         {
-           path:'/' ,
+           path:'/cc_shop' ,
            component:Home,
         },
         {

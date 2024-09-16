@@ -1,27 +1,29 @@
 <template>
 <div class="show">
-    <div class="pic">
-      <img :src="imaUrl(route.query.img)">
+  <div class="display">
+    <!-- 视频优先级高于图片 -->
+    <video :src="imgUrl(route.query.video)" controls v-if="route.query.video != ''"></video> 
+    <img :src="imgUrl(route.query.img)" v-else-if="route.query.img != ''">
+  </div>
+  <div class="content">
+    <div class="title">
+      {{ route.query.name }}
     </div>
-    <div class="content">
-        <div class="title">
-          {{ route.query.name }}
-        </div>
-        <hr>
-        <div class="avatar">
-          卖家：<a>{{ route.query.seller }}</a>
-        </div>
-        <div class="detail">
-          {{ route.query.des }}
-        </div>
-        <div class="price">
-          价格：{{ route.query.price }}
-        </div>
-        <hr>
-        <div class="buy">
-          <a-button class="buy-button" @click="buy">立即购买</a-button>
-        </div>
+    <hr>
+    <div class="avatar">
+      卖家：<a>{{ route.query.seller }}</a>
     </div>
+    <div class="detail">
+      {{ route.query.des }}
+    </div>
+    <div class="price">
+      价格：{{ route.query.price }}
+    </div>
+    <hr>
+    <div class="buy">
+      <a-button class="buy-button" @click="buy">立即购买</a-button>
+    </div>
+  </div>
 </div>
 <div >
   <a-comment v-for="com in Comment">
@@ -76,7 +78,7 @@ import { ref } from 'vue'
 let route = useRoute()
 const Comment = JSON.parse(route.query.comment); //解析json文件
 
-const imaUrl = (url: string) => { //动态设置图片地址
+const imgUrl = (url: string) => { //动态设置图片地址
   return new URL(`../assets/${url}`, import.meta.url).href
 }
 
@@ -121,6 +123,8 @@ const edit = () => {
   display.value = 1
 }
 
+
+
 </script>
 
 <style scoped>
@@ -132,10 +136,10 @@ const edit = () => {
     display: flex;
 }
 
-.pic{
+.display{
     height: 400px;
     width: 400px;
-    background-color: aquamarine;
+    background-color: rgb(233, 233, 233);
     object-fit: cover;
 }
 
@@ -187,7 +191,13 @@ const edit = () => {
     height: 50px;
 }
 
-img {
+video {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+
+img{
   width:100%;
   height:100%;
   object-fit: cover;

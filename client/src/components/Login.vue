@@ -42,7 +42,7 @@ const jump = async () => {
         localStorage.setItem('token', response.data.token);
 
         message.success("登录成功");
-        router.push('/'); // 登录成功后跳转到主页
+        router.push('/cc_shop/'); // 登录成功后跳转到主页
     } catch (error) {
         if (error.response) {
             message.error(error.response.data.message); // 错误信息来自后端

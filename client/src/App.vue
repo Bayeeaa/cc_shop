@@ -7,7 +7,7 @@
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
           <pie-chart-outlined />
-          <RouterLink to="/cc_shop"> 首页 </RouterLink>
+          <RouterLink to="/cc_shop/"> 首页 </RouterLink>
         </a-menu-item>
         <a-menu-item key="2">
           <desktop-outlined />
@@ -18,12 +18,23 @@
     <a-layout>
       <a-layout-header style="background: #ffffff; padding: 0;">
         <div style="float: right; padding-right: 20px;">
-          <RouterLink to="/ccshop/user">
-            <a-avatar>
-              <template #icon><UserOutlined /></template>
-            </a-avatar>
-            {{ user.name }}
-          </RouterLink>
+          <div v-if="user.name==''">
+            <RouterLink to="/cc_shop/login">
+              <a-avatar>
+                <template #icon><UserOutlined /></template>
+              </a-avatar>
+              {{ user.name }}
+            </RouterLink>          
+          </div>
+          <div v-else>
+            <RouterLink to="/cc_shop/user">
+              <a-avatar>
+                <template #icon><UserOutlined /></template>
+              </a-avatar>
+              {{ user.name }}
+            </RouterLink>   
+          </div>
+
         </div>
       </a-layout-header>
       <a-layout-content style="margin: 0 12px">
@@ -53,9 +64,9 @@ const selectedKeys = ref<string[]>(['1']);
 const show_username = async () => {
   try {
     const token = localStorage.getItem('token');
-    
+    console.log(token);
     if (!token) {
-      user.value.name = '未注册';
+      user.value.name = '登入';      
       return;
     }
 
@@ -68,6 +79,8 @@ const show_username = async () => {
     // 将当前用户的用户名存储到 user 变量中
     user.value.name = response.data.username;
     console.log('当前用户名:', user.value.name); // 输出当前用户名
+    
+    
   } catch (error) {
     message.error("获取用户名失败");
   }

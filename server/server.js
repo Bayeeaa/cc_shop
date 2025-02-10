@@ -143,18 +143,47 @@ app.get('/currentUser', authenticateToken, (req, res) => {
     }
 });
 
-router.put('/updateUserInfo', authenticateToken, (req, res) => {
+app.post('/updateUserInfo', authenticateToken, (req, res) => {
     const { sex, birth, infomation } = req.body;
-    const username = req.username;
-  
+    const username = req.user.name;  // 获取当前用户的用户名
+
+    console.log('更新用户信息:', { sex, birth, infomation, username });  // 查看传入的请求数据
+
     const sql = 'UPDATE users SET sex = ?, birth = ?, infomation = ? WHERE name = ?';
+    
     db.query(sql, [sex, birth, infomation, username], (err, result) => {
-      if (err) {
-        return res.status(500).json({ message: '数据库更新失败', error: err });
-      }
-      res.json({ message: '用户信息更新成功' });
+        if (err) {
+            console.error('数据库错误:', err);  // 打印数据库错误
+            return res.status(500).json({ message: '数据库更新失败', error: err });
+        }
+        console.log('数据库更新成功:', result);  // 打印数据库更新结果
+        res.json({ message: '用户信息更新成功' });
     });
-  });
+});
+
+app.get('/currentUserInfo', authenticateToken, (req, res) => {
+    // 从 token 中获取用户信息
+    const userId = req.user.id;  // userId 是从 token 中提取的
+    const userName = req.user.name;  // 假设用户名保存在 token 的 payload 中
+
+    const query = 'SELECT sex, birth, infomation FROM users WHERE id = ?';
+    db.query(query, [userId], (err, results) => {
+    if (err) {
+        return res.status(500).json({ message: '服务器错误' });
+    }
+
+    if (results.length === 0) {
+        return res.status(404).json({ message: '用户未找到' });
+    }
+
+    // 返回用户名
+    const username = results[0].name;
+    const sex = results[0].sex;
+    const birth = results[0].birth;
+    const infomation = results[0].infomation;
+    res.json({ sex, birth, infomation });
+    });
+});
   
 module.exports = router;
 
